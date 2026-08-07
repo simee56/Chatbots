@@ -2,3 +2,4 @@ flask
 python-dotenv
 langchain-core
 langchain-google-genai
+gunicorn
