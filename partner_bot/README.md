@@ -1,4 +1,4 @@
-# Partner Chat
+# Textmate
 
 A small Flask app: pick whether you're male or female, name your partner,
 and chat with an AI that stays in character as them. Built with LangChain
