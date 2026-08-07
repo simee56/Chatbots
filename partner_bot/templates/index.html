@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Partner Chat</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Setup screen -->
+    <div id="setup-screen" class="card">
+      <h1>💬 Partner Chat</h1>
+      <p class="subtitle">A little fun project — chat with your own AI partner.</p>
+
+      <div class="field">
+        <label>You are:</label>
+        <div class="toggle-group" id="gender-group">
+          <button type="button" class="toggle-btn" data-value="male">Male</button>
+          <button type="button" class="toggle-btn" data-value="female">Female</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="partner-name">What should we call your partner?</label>
+        <input type="text" id="partner-name" placeholder="e.g. Alex" maxlength="30">
+      </div>
+
+      <button id="start-btn" class="primary-btn">Start Chatting</button>
+      <p id="setup-error" class="error"></p>
+    </div>
+
+    <!-- Chat screen -->
+    <div id="chat-screen" class="card chat-card hidden">
+      <div class="chat-header">
+        <div class="chat-avatar" id="chat-avatar">A</div>
+        <div class="chat-header-info">
+          <div class="name" id="chat-partner-name">Partner</div>
+          <div class="status"><span class="status-dot"></span>Online</div>
+        </div>
+        <button id="reset-btn" class="link-btn">Restart</button>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div class="input-row">
+        <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+        <button id="send-btn" class="primary-btn">Send</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
