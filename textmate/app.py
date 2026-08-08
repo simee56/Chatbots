@@ -14,7 +14,7 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-change-me")
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = "gemini-2.5-flash-lite"
 
 llm = ChatGoogleGenerativeAI(
     model=MODEL_NAME,
