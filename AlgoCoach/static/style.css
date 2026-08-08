@@ -1,0 +1,215 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #05070a;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(46,230,166,0.06), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(46,230,166,0.04), transparent 40%);
+  font-family: "Consolas", "SFMono-Regular", "Menlo", "Courier New", monospace;
+  padding: 20px;
+}
+
+.terminal {
+  width: 100%;
+  max-width: 640px;
+  background: #0b0f14;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #1c2530, 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(46,230,166,0.05);
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #10161d;
+  border-bottom: 1px solid #1c2530;
+}
+
+.dots { display: flex; gap: 7px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.red { background: #ff5f57; }
+.dot.yellow { background: #febc2e; }
+.dot.green { background: #28c840; }
+
+.titlebar-label {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: #5c6670;
+  letter-spacing: 0.3px;
+}
+
+.reset-btn {
+  background: none;
+  border: none;
+  color: #5c6670;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.reset-btn:hover { color: #2ee6a6; background: #16202a; }
+
+.term-body {
+  padding: 22px 20px;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden { display: none !important; }
+
+/* ---- Intro screen ---- */
+
+#intro-screen { text-align: left; }
+
+.ascii {
+  color: #2ee6a6;
+  font-size: 10px;
+  line-height: 1.15;
+  margin: 0 0 18px;
+  white-space: pre;
+  text-shadow: 0 0 12px rgba(46,230,166,0.35);
+  overflow-x: auto;
+}
+
+.boot-line {
+  color: #8b98a5;
+  font-size: 13px;
+  margin: 4px 0;
+  line-height: 1.6;
+}
+.accent { color: #2ee6a6; font-weight: 700; }
+
+.run-btn {
+  margin-top: 18px;
+  background: #10161d;
+  border: 1px solid #2a3644;
+  color: #2ee6a6;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.run-btn:hover { border-color: #2ee6a6; background: #0e1a15; }
+.run-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.error { color: #ff6b6b; font-size: 12.5px; margin-top: 14px; min-height: 14px; }
+
+/* ---- Chat / terminal output ---- */
+
+#chat-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 12px;
+  max-height: 420px;
+}
+
+.messages::-webkit-scrollbar { width: 6px; }
+.messages::-webkit-scrollbar-thumb { background: #1c2530; border-radius: 10px; }
+.messages::-webkit-scrollbar-track { background: transparent; }
+
+.line {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  animation: type-in 0.15s ease;
+}
+
+@keyframes type-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.line .tag {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.line.user .tag { color: #5b8cff; }
+.line.bot .tag { color: #2ee6a6; }
+
+.line .text {
+  color: #c9d1d9;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.line.user .text { color: #d7e0ea; }
+
+.line.typing .text {
+  color: #5c6670;
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+.typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4a5561;
+  display: inline-block;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid #1c2530;
+  padding-top: 12px;
+}
+
+.prompt {
+  color: #2ee6a6;
+  font-size: 13.5px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.input-line input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e6edf3;
+  font-family: inherit;
+  font-size: 13.5px;
+  caret-color: transparent;
+}
+.input-line input::placeholder { color: #3d4854; }
+
+.cursor {
+  color: #2ee6a6;
+  animation: blink 1s step-end infinite;
+  pointer-events: none;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
