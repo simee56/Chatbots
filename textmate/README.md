@@ -9,7 +9,7 @@ and chat with an AI that stays in character as them. Built with LangChain
 ```bash
 cd partner-chatbot
 python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
+source venv/bin/activate     
 pip install -r requirements.txt
 
 cp .env.example .env
@@ -37,9 +37,6 @@ Only a session id lives in the cookie — the actual chain and its message
 history live in Python dicts on the server (`chat_chains`,
 `message_histories`), which means:
 - It resets if the server restarts.
-- It won't work correctly if you deploy with multiple worker
-  processes/instances (each worker has its own memory). Fine for
-  personal use; swap in Redis or a DB if you want it more robust.
 
 ## Deploying
 
