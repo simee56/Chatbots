@@ -33,25 +33,3 @@ Open http://localhost:5000
   the reply, so conversation context carries forward on the next call.
 - `/reset` — clears the session so you can start over.
 
-Only a session id lives in the cookie — the actual chain and its message
-history live in Python dicts on the server (`chat_chains`,
-`message_histories`), which means:
-- It resets if the server restarts.
-
-## Deploying
-
-Any host that runs a Python web app works (Render, Railway, Fly.io,
-a VPS, etc.). General steps:
-
-1. Push this folder to a GitHub repo (don't commit `.env`).
-2. On the host, set these environment variables in its dashboard:
-   - `GOOGLE_GEMINI_KEY`
-   - `FLASK_SECRET_KEY` (any random string)
-3. Set the start command to something like:
-   ```
-   gunicorn app:app
-   ```
-4. **Important:** if your host runs more than one worker process,
-   the in-memory `chat_sessions` dict won't be shared between them and
-   users may randomly lose their chat. For single-worker/personal
-   deployments this isn't an issue.

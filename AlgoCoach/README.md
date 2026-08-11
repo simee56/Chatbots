@@ -27,12 +27,4 @@ Open http://localhost:5000
 - `/chat` sends your message through it and returns the reply
 - `/reset` clears the session
 
-Chat history lives in memory on the server, so it resets on restart.
-Fine for a solo project.
 
-## Deploying
-
-Push to GitHub, deploy on Render (or Railway/Fly.io) with:
-- Build: `pip install -r requirements.txt`
-- Start: `gunicorn app:app --timeout 60`
-- Env vars: `GOOGLE_GEMINI_KEY`, `FLASK_SECRET_KEY`
